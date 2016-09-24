@@ -1,0 +1,27 @@
+post_install() {
+    NEWVERSION=$1
+    systemctl daemon-reload
+    systemctl enable weekly-clamscan.timer
+    systemctl start weekly-clamscan.timer
+    udevadm control --reload-rules
+}
+
+post_upgrade() {
+    NEWVERSION=$1
+    OLDVERSION=$2
+    systemctl daemon-reload
+}
+
+pre_remove() {
+    OLDVERSION=$1
+    systemctl stop weekly-clamscan.service
+    systemctl stop weekly-clamscan.timer
+    systemctl disable weekly-clamscan.timer
+}
+
+post_remove() {
+    OLDVERSION=$1
+    systemctl daemon-reload
+    udevadm control --reload-rules
+}
+

@@ -1,0 +1,10 @@
+# Pause a scan if there's one in progress and uninstall the timer to prevent
+# it from getting started until the power is restored
+ACTION=="change", SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="/usr/bin/systemctl kill --signal=SIGSTOP weekly-clamscan.service"
+ACTION=="change", SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="/usr/bin/systemctl disable weekly-clamscan.timer"
+
+# Reenable the timer and unpause a process if necessary. systemd will handle
+# figuring out if the service should be launched after an abort based on a
+# persistent timestamp of when the service was last run.
+ACTION=="change", SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="/usr/bin/systemctl enable weekly-clamscan.timer"
+ACTION=="change", SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="/usr/bin/systemctl kill --signal=SIGCONT weekly-clamscan.service"
