@@ -1,7 +1,7 @@
 # Maintainer: Justin Willmert <justin@jdjlab.com>
 pkgname=weekly-clamscan
 pkgver=0.9
-pkgrel=1
+pkgrel=2
 pkgdesc="Runs a weekly system-wide scan for viruses using clamscan"
 arch=(any)
 url=""
@@ -15,7 +15,7 @@ source=(
     )
 md5sums=(
     e7f8a4b6564b5dc8d1365b67ddb10593
-    1e77a74584539ca23399848b597bab9d
+    58c4b59e394316c88a51f32498ebe780
     9eb0b70a30e47f8379665d6fcbe2753c
     )
 

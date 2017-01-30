@@ -3,5 +3,6 @@ Description=Run a system-wide scan for viruses using clamscan
 
 [Service]
 Type=simple
+Nice=15
 ExecStart=/usr/bin/clamscan --recursive=yes --infected --suppress-ok-results --exclude-dir='^/sys|^/proc|^/dev' /
 
